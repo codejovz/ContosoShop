@@ -5,7 +5,7 @@ using ContosoShop.Server.Data;
 using ContosoShop.Server.Services;
 using ContosoShop.Shared.Models;
 using System.Text.Json.Serialization;
-using GitHub.Copilot.SDK;
+using GitHub.Copilot;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,11 +89,7 @@ builder.Services.AddScoped<SupportAgentTools>();
  builder.Services.AddSingleton<CopilotClient>(sp =>
  {
      var logger = sp.GetRequiredService<ILogger<CopilotClient>>();
-     return new CopilotClient(new CopilotClientOptions
-     {
-         AutoStart = true,
-         LogLevel = "info"
-     });
+     return new CopilotClient(new CopilotClientOptions());
  });
 
 // Configure CORS with explicit whitelist (T024s - Security hardened)
